@@ -1,0 +1,22 @@
+[project]
+name = "wildbrain-kids-ai"
+version = "0.1.0"
+description = "Kid-safe AI SDK for game companions and character experiences"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "WildBrain Kids AI" }]
+dependencies = [
+  "pydantic>=2.0.0",
+  "python-dotenv>=1.0.0",
+]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
