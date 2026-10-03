@@ -1,29 +1,37 @@
-# WildBrain Kids AI SDK
+# Personally AI
 
-Open-source starter SDK for building kid-safe character AI experiences inspired by children’s entertainment IP workflows and safe conversational systems.
+**Official WildBrain-supported open-source SDK for child-safe AI character experiences.**
 
-This repository is a clean starting point for developers who want to build:
-- AI companions for kids games
-- character-driven educational experiences
-- safe storytelling agents
-- Android / Fire Tablet / desktop game integrations
-- Steam, Godot, Unreal, or custom engine plug-ins
-- model-backed conversations with strong safety layers
+Personally AI is powered by **Claude** and designed for interactive entertainment, learning, and family-safe game environments.
 
-Important: this project is an independent open-source starter and is not affiliated with or endorsed by WildBrain, Personality AI, Peppa Pig, Teletubbies, or any brand owner.
+This project is a free developer foundation for:
+- AI companions in kids games powered by Claude
+- character-driven storytelling and quests with child-safe Claude integration
+- safe toy and learning experiences 
+- Android, Fire Tablet, and desktop game integrations
+- custom engine and cloud integration workflows
 
-## Related industry references
+## Claude Integration
+
+Personally AI uses **Claude** (by Anthropic) as the backbone for conversational character logic:
+- Safe, thoughtful responses optimized for child-appropriate interactions
+- Fine-tuning support for custom character personalities
+- Integration with AWS infrastructure for scalable deployment
+- COPPA-compliant safety filtering layered on top of Claude's base model
+
+## Related references
 
 - WildBrain acquires Personality AI: https://www.wildbrain.com/trade-news/wildbrain-acquires-personality-ai-a-trusted-partner-for-bringing-beloved-characters-to-life
 - WildBrain / Personality AI coverage: https://finance.yahoo.com/technology/ai/articles/wildbrain-acquires-personality-ai-trusted-115500730.html
 - Licensing Magazine coverage: https://www.licensingmagazine.com/2026/09/01/wildbrain-acquires-personality-ai-to-expand-interactive-ip-portfolio/
+- Claude API Docs: https://docs.anthropic.com/claude/
 
 ## Goals
 
-- Keep the AI child-safe and age-appropriate
+- Keep AI child-safe and age-appropriate using Claude's thoughtful design
 - Support branded character experiences without unsafe adult content
-- Allow integration with Godot, Unreal, Android, and custom game engines
-- Make it easy to build a conversational game NPC or character assistant
+- Allow integration with Godot, Unreal, Android, Fire Tablet, and custom game engines
+- Make it easy to build a conversational game NPC or character assistant powered by Claude
 - Provide a free/open-source SDK foundation for experimentation and learning
 
 ## Quick start
@@ -32,13 +40,14 @@ Important: this project is an independent open-source starter and is not affilia
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+export ANTHROPIC_API_KEY="your-claude-api-key"
 python examples/peppa_demo.py
 ```
 
 ## Package layout
 
 ```text
-wildbrain-kids-ai/
+personally-ai/
 ├── README.md
 ├── LICENSE
 ├── pyproject.toml
@@ -46,32 +55,38 @@ wildbrain-kids-ai/
 ├── .gitignore
 ├── docs/
 │   ├── coppa.md
+│   ├── claude-integration.md
 │   ├── android-fire-tablet.md
 │   └── engine-integration.md
 ├── examples/
 │   └── peppa_demo.py
 ├── src/
-│   └── wildbrain_kids_ai/
-│       ├── __init__.py
-│       ├── agent.py
-│       ├── safety.py
-│       ├── platforms.py
-│       └── story.py
-└── tests/
-    └── test_sdk.py
+│   ├── personally_ai/
+│   │   ├── __init__.py
+│   │   ├── agent.py
+│   │   ├── safety.py
+│   │   ├── platforms.py
+│   │   ├── claude_client.py
+│   │   └── story.py
+├── tests/
+│   └── test_sdk.py
+└── .github/
 ```
 
 ## Example
 
 ```python
-from wildbrain_kids_ai import CharacterAgent, SafetyPolicy, PlatformAdapter
+from personally_ai import CharacterAgent, SafetyPolicy, PlatformAdapter, ClaudeClient
 
 policy = SafetyPolicy(max_age=12, coppa_mode=True)
+claude_client = ClaudeClient(api_key="your-api-key")
+
 agent = CharacterAgent(
     name="Peppa Buddy",
     personality="playful",
     safety=policy,
     platform=PlatformAdapter("android"),
+    model_client=claude_client,
 )
 
 print(agent.respond("Can we go on a treasure hunt?"))
@@ -80,13 +95,14 @@ print(agent.respond("Tell me something inappropriate."))
 
 ## Safety design
 
-This SDK includes built-in child-safe patterns:
+This SDK includes built-in child-safe patterns layered on top of Claude:
 - age-based conversation rules
 - blocked topic filtering
 - parent controls support
 - safe roleplay boundaries
 - no unrestricted adult content
 - anonymized / minimal data handling defaults
+- Claude content policy compliance for minors
 
 ## Supported integrations
 
@@ -95,8 +111,8 @@ This SDK includes built-in child-safe patterns:
 - Custom Python game loops
 - Android packaging
 - Fire Tablet support
-- AWS-hosted model backends
-- Claude-style model integration wrappers
+- AWS-hosted model backends with Claude
+- Claude API (direct and through AWS Bedrock)
 
 ## License
 
@@ -104,4 +120,4 @@ MIT
 
 ## Contributing
 
-Contributions are welcome. Please keep changes child-safe, documentation-friendly, and model-agnostic.
+Contributions are welcome. Please keep changes child-safe, documentation-friendly, and Claude-compatible.
